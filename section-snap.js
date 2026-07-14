@@ -1,19 +1,37 @@
 // ======================================
-// Import GSAP and the plugins we'll use
+// Import GSAP
 // ======================================
 
 import gsap from "https://cdn.skypack.dev/gsap";
 import { ScrollTrigger } from "https://cdn.skypack.dev/gsap/ScrollTrigger";
 import { ScrollToPlugin } from "https://cdn.skypack.dev/gsap/ScrollToPlugin";
 
-// Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 // ======================================
-// Get all sections that should snap
+// Get all snap sections
 // ======================================
 
 const sections = gsap.utils.toArray(".snap-section");
 
-// Check everything loaded correctly
-console.log("Snap Sections:", sections);
+// ======================================
+// Create smooth snapping
+// ======================================
+
+ScrollTrigger.create({
+
+    snap:{
+
+        snapTo:sections.map(section=>section.offsetTop),
+
+        duration:0.8,
+
+        ease:"expo.inOut",
+
+        inertia:true
+
+    }
+
+});
+
+console.log("Snap Ready");
